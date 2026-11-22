@@ -1,0 +1,19 @@
+services:
+  - type: worker
+    name: secret-santa-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python bot.py
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: DEFAULT_BUDGET
+        value: "1500"
+      - key: DB_PATH
+        value: /var/data/santa.db
+    disk:
+      name: santa-data
+      mountPath: /var/data
+      sizeGB: 1
